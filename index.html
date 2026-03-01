@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Food Recipe Maker</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">🍳</span>
+        <span class="logo-text">Food Recipe Maker</span>
+      </div>
+      <button class="btn-icon" id="settings-btn" title="API Key Settings" aria-label="API Key Settings">
+        ⚙️
+      </button>
+    </div>
+  </header>
+
+  <!-- API Key Modal -->
+  <div class="modal-overlay" id="api-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal">
+      <h2 id="modal-title">OpenAI API Key</h2>
+      <p class="modal-description">
+        Enter your OpenAI API key to generate recipe ideas. Your key is stored only in your browser's localStorage and is never sent anywhere except directly to OpenAI.
+      </p>
+      <p class="modal-help">
+        Don't have a key? <a href="https://platform.openai.com/api-keys" target="_blank" rel="noopener noreferrer">Get one at platform.openai.com</a>
+      </p>
+      <div class="input-row">
+        <input
+          type="password"
+          id="api-key-input"
+          class="text-input"
+          placeholder="sk-..."
+          autocomplete="off"
+          aria-label="OpenAI API Key"
+        />
+        <button class="btn btn-primary" id="save-api-key-btn">Save</button>
+      </div>
+      <button class="btn btn-secondary modal-close-btn" id="close-modal-btn">Cancel</button>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <main class="main">
+    <!-- Hero Section -->
+    <section class="hero">
+      <h1 class="hero-title">What's in your fridge?</h1>
+      <p class="hero-subtitle">Add the ingredients you have and let AI create delicious recipe ideas for you.</p>
+    </section>
+
+    <!-- API Key Banner (shown when key is missing) -->
+    <div class="api-banner" id="api-banner" role="alert">
+      <span>⚠️ No API key set.</span>
+      <button class="btn btn-small btn-primary" id="set-key-banner-btn">Set API Key</button>
+    </div>
+
+    <!-- Ingredient Input Section -->
+    <section class="card ingredient-section">
+      <h2 class="section-title">Your Ingredients</h2>
+      <div class="input-row">
+        <input
+          type="text"
+          id="ingredient-input"
+          class="text-input"
+          placeholder="e.g. chicken, garlic, tomatoes…"
+          aria-label="Ingredient name"
+          maxlength="80"
+        />
+        <button class="btn btn-primary" id="add-ingredient-btn">Add</button>
+      </div>
+      <div class="ingredient-tags" id="ingredient-tags" aria-live="polite" aria-label="Added ingredients"></div>
+      <p class="empty-state" id="no-ingredients-msg">No ingredients added yet. Start by typing one above!</p>
+    </section>
+
+    <!-- Generate Button -->
+    <div class="generate-row">
+      <button class="btn btn-accent btn-large" id="get-recipes-btn" disabled>
+        <span class="btn-text">🔍 Find Recipes</span>
+        <span class="spinner" id="btn-spinner" aria-hidden="true"></span>
+      </button>
+    </div>
+
+    <!-- Error Message -->
+    <div class="error-message" id="error-message" role="alert" aria-live="assertive"></div>
+
+    <!-- Recipes Section -->
+    <section id="recipes-section" class="recipes-section" aria-live="polite">
+      <div class="recipe-grid" id="recipe-grid"></div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>Powered by <a href="https://openai.com" target="_blank" rel="noopener noreferrer">OpenAI</a> · Built with ❤️ and vanilla JS</p>
+  </footer>
+
+  <script src="js/api.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
